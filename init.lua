@@ -179,26 +179,26 @@ require('lazy').setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter',
-    ---@module 'which-key'
-    ---@type wk.Opts
-    ---@diagnostic disable-next-line: missing-fields
-    opts = {
-      -- delay between pressing a key and opening which-key (milliseconds)
-      delay = 0,
-      icons = { mappings = vim.g.have_nerd_font },
-
-      -- Document existing key chains
-      spec = {
-        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-        { 'gr', group = 'LSP Actions', mode = { 'n' } },
-      },
-    },
-  },
+  -- { -- Useful plugin to show you pending keybinds.
+  --   'folke/which-key.nvim',
+  --   event = 'VimEnter',
+  --   ---@module 'which-key'
+  --   ---@type wk.Opts
+  --   ---@diagnostic disable-next-line: missing-fields
+  --   opts = {
+  --     -- delay between pressing a key and opening which-key (milliseconds)
+  --     delay = 0,
+  --     icons = { mappings = vim.g.have_nerd_font },
+  --
+  --     -- Document existing key chains
+  --     spec = {
+  --       { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
+  --       { '<leader>t', group = '[T]oggle' },
+  --       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+  --       { 'gr', group = 'LSP Actions', mode = { 'n' } },
+  --     },
+  --   },
+  -- },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -462,8 +462,15 @@ require('lazy').setup({
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
-      },
 
+        menu = {
+          border = "rounded",        -- none, single, double, rounded, etc.
+          winblend = 0,
+          scrollbar = true,
+          min_width = 15,
+          max_height = 10,
+        },
+      },
       sources = {
         default = { 'lsp', 'path', 'snippets' },
       },
