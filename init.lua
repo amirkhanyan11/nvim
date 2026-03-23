@@ -7,6 +7,7 @@ vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.o.relativenumber = true
+vim.o.number = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -465,6 +466,8 @@ require('lazy').setup({
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'enter',
 
+        -- ['<C-i>'] = { function(cmp) cmp.show() end },
+
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
@@ -660,13 +663,13 @@ require('lazy').setup({
 vim.schedule(function() require 'mappings' end)
 
 --- Set colorscheme ---
-vim.cmd.colorscheme 'horizon'
+vim.cmd.colorscheme 'rose-pine'
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = '/home/artyom/projects/tts-1102/*',
   callback = function()
     -- Changed vim.jobstart to vim.fn.jobstart
-    vim.fn.jobstart('rsync -rtvzl --no-perms --no-owner --no-group /home/artyom/projects/tts-1102/ nvidia@10.1.245.77:projects/tts-1102 --exclude .git --exclude __pycache__ --exclude "*.pyc"', {
+    vim.fn.jobstart('rsync -rtvzl --no-perms --no-owner --no-group /home/artyom/projects/tts-1102/ nvidia@10.1.245.77:projects/tts-1102 --exclude __pycache__ --exclude "*.pyc", --exclude "*.docx" --exclude docs', {
       on_exit = function(_, exit_code, _)
         if exit_code == 0 then
           print('File synced successfully!')
@@ -676,4 +679,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
       end,
     })
   end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  command = [[%s/^\s\+$//e]],
 })
