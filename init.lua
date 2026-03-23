@@ -330,8 +330,25 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+	basedpyright = {
+		settings = {
+			basedpyright = {
+				analysis = {
+					-- Disable specific "noisy" hints
+					typeCheckingMode = "basic", -- Options: "off", "basic", "standard", "strict"
+					diagnosticSeverityOverrides = {
+						reportUnusedImport = "none",
+						reportUnusedVariable = "none",
+						reportGeneralTypeIssues = "none",
+						-- Disable the "hint" that a variable is unknown
+						reportUnknownVariableType = "none",
+						reportUnknownMemberType = "none",
+						reportUnknownArgumentType = "none",
+					},
+				},
+			},        -- rust_analyzer = {},
+		},
+	},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -430,7 +447,7 @@ require('lazy').setup({
         --    This will auto-import if your LSP supports it.
         --    This will expand snippets if the LSP sent a snippet.
         -- 'super-tab' for tab to accept
-        -- 'enter' for enter to accept
+        -- 'enter', -- for enter to accept
         -- 'none' for no mappings
         --
         -- For an understanding of why the 'default' preset is recommended,
@@ -446,7 +463,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -543,9 +560,26 @@ require('lazy').setup({
     lazy = false,
     build = ':TSUpdate',
     branch = 'main',
+
+    opts = {
+      ensure_installed = parsers,
+      highlight = { enable = true },
+      indent = { enable = true },
+    },
+
+    --[[
+    -- 
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = parsers,
+        highlight = { enable = true }, -- This is the standard way to enable highlights
+        indent = { enable = true },
+      })
+    --
+    --]]
+
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'python', 'cpp', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
@@ -627,3 +661,19 @@ vim.schedule(function() require 'mappings' end)
 
 --- Set colorscheme ---
 vim.cmd.colorscheme 'horizon'
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '/home/artyom/projects/tts-1102/*',
+  callback = function()
+    -- Changed vim.jobstart to vim.fn.jobstart
+    vim.fn.jobstart('rsync -rtvzl --no-perms --no-owner --no-group /home/artyom/projects/tts-1102/ nvidia@10.1.245.77:projects/tts-1102 --exclude .git --exclude __pycache__ --exclude "*.pyc"', {
+      on_exit = function(_, exit_code, _)
+        if exit_code == 0 then
+          print('File synced successfully!')
+        else
+          print('Error syncing file. Exit code: ' .. exit_code)
+        end
+      end,
+    })
+  end,
+})
