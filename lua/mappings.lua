@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+local functions = require('functions')
+
 map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'jk', '<ESC>')
 
@@ -33,3 +35,6 @@ map('n', '<leader>h', function() require('harpoon.ui').toggle_quick_menu() end, 
 for i = 1, 4 do
   map('n', '<leader>' .. i, function() require('harpoon.ui').nav_file(i) end, { desc = 'Harpoon goto file' .. i })
 end
+
+-- Gitsigns
+map('n', '<leader>dt', functions.diff_with_commit, { desc = 'Gitsings diff with commit' })
