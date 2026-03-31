@@ -38,3 +38,6 @@ end
 
 -- Gitsigns
 map('n', '<leader>dt', functions.diff_with_commit, { desc = 'Gitsings diff with commit' })
+
+-- Telescope custom
+map('n', '<leader>/', functions.live_multigrep, { desc = 'Live Grep' })

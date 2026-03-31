@@ -94,13 +94,13 @@ return {
         })
       end, { desc = 'Fuzzily search in current buffer' })
 
-      vim.keymap.set('n', '<leader>/', function()
-          require('telescope.builtin').live_grep {
-            prompt_title = 'Live Grep',
-          }
-        end,
-        { desc = '[S]earch [/] in cwd' }
-      )
+      -- vim.keymap.set('n', '<leader>/', function()
+      --     require('telescope.builtin').live_grep {
+      --       prompt_title = 'Live Grep',
+      --     }
+      --   end,
+      --   { desc = '[S]earch [/] in cwd' }
+      -- )
 
       vim.keymap.set('n', '<leader>cf', function()
         require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' } end,

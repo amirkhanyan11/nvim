@@ -332,25 +332,25 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         -- gopls = {},
-	basedpyright = {
-		settings = {
-			basedpyright = {
-				analysis = {
-					-- Disable specific "noisy" hints
-					typeCheckingMode = "basic", -- Options: "off", "basic", "standard", "strict"
-					diagnosticSeverityOverrides = {
-						reportUnusedImport = "none",
-						reportUnusedVariable = "none",
-						reportGeneralTypeIssues = "none",
-						-- Disable the "hint" that a variable is unknown
-						reportUnknownVariableType = "none",
-						reportUnknownMemberType = "none",
-						reportUnknownArgumentType = "none",
-					},
-				},
-			},        -- rust_analyzer = {},
-		},
-	},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                -- Disable specific "noisy" hints
+                typeCheckingMode = "basic", -- Options: "off", "basic", "standard", "strict"
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = "none",
+                  reportUnusedVariable = "none",
+                  reportGeneralTypeIssues = "none",
+                  -- Disable the "hint" that a variable is unknown
+                  reportUnknownVariableType = "none",
+                  reportUnknownMemberType = "none",
+                  reportUnknownArgumentType = "none",
+                },
+              },
+            },        -- rust_analyzer = {},
+          },
+        },
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -388,6 +388,7 @@ require('lazy').setup({
             Lua = {}
           },
         },
+        marksman = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -670,7 +671,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = '/home/artyom/projects/tts-1102/*',
   callback = function()
     -- Changed vim.jobstart to vim.fn.jobstart
-    vim.fn.jobstart('rsync -rtvzl --no-perms --no-owner --no-group /home/artyom/projects/tts-1102/ nvidia@10.1.245.77:projects/tts-1102 --exclude __pycache__ --exclude "*.pyc", --exclude "*.docx" --exclude docs', {
+    vim.fn.jobstart('rsync -rtvzl --no-perms --no-owner --no-group /home/artyom/projects/tts-1102/ nvidia@10.1.22.211:projects/tts-1102 --exclude __pycache__ --exclude "*.pyc", --exclude "*.docx" --exclude docs', {
       on_exit = function(_, exit_code, _)
         if exit_code == 0 then
           print('File synced successfully!')
