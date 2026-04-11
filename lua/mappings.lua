@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 local functions = require('functions')
 
-map('n', ';', ':', { desc = 'CMD enter command mode' })
+-- map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'jk', '<ESC>')
 
 -- Misc
@@ -32,7 +32,7 @@ map('n', '<leader>H', function() require('harpoon.mark').add_file() end, { desc 
 
 map('n', '<leader>h', function() require('harpoon.ui').toggle_quick_menu() end, { desc = 'Harpoon toggle quick menu' })
 
-for i = 1, 4 do
+for i = 1, 6 do
   map('n', '<leader>' .. i, function() require('harpoon.ui').nav_file(i) end, { desc = 'Harpoon goto file' .. i })
 end
 

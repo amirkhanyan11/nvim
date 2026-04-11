@@ -85,7 +85,11 @@ return {
 
 
 -------------------------------------------------------------------------- 
-      vim.keymap.set('n', '<leader><space>', '<cmd>Telescope find_files<cr>', { desc = 'Telescope find files' })
+      vim.keymap.set('n', '<leader><space>', function()
+        require('telescope.builtin').find_files({
+          no_ignore = true,
+        })
+      end, { desc = 'Telescope find files' })
 
       vim.keymap.set('n', '<leader>f', function()
         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -114,6 +118,9 @@ return {
         require('telescope.builtin').git_commits()
       end, { desc = 'Git commits' })
 
+      vim.keymap.set('n', '<leader>fm', function()
+        require('telescope.builtin').live_grep({ cwd = vim.fn.expand('%:p:h') })
+      end, {  desc = '[L]ive [G]rep [I]nside [C]wd' })
 -------------------------------------------------------------------------- 
 
 

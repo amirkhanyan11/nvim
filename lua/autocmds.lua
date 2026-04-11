@@ -2,11 +2,11 @@
 local projects = {
   {
     local_path = '/home/artyom/projects/tts-1102/',
-    remote_path = 'nvidia@10.1.22.211:projects/tts-1102',
+    remote_path = 'nvidia@10.1.245.77:projects/tts-1102',
   },
   {
     local_path = '/home/artyom/projects/tts-0040/',
-    remote_path = 'nvidia@10.1.22.211:projects/tts-0040',
+    remote_path = 'nvidia@10.1.245.77:projects/tts-0040',
   },
 }
 

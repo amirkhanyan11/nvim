@@ -87,4 +87,9 @@ return {
       }
     }
   },
+
+  {
+    'rebelot/kanagawa.nvim',
+  },
+
 }

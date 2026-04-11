@@ -389,6 +389,8 @@ require('lazy').setup({
           },
         },
         marksman = {},
+        bashls = {},
+
       }
 
       -- Ensure the servers and tools above are installed
@@ -584,7 +586,7 @@ require('lazy').setup({
 
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
-      local parsers = { 'python', 'cpp', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'python', 'cpp', 'bash', 'c', 'diff', 'html', 'json', 'yaml','lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
@@ -667,4 +669,4 @@ vim.schedule(function() require 'mappings' end)
 vim.schedule(function() require 'autocmds' end)
 
 --- Set colorscheme ---
-vim.cmd.colorscheme 'rose-pine'
+vim.cmd.colorscheme 'kanagawa-dragon'
