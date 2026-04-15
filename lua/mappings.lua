@@ -41,3 +41,6 @@ map('n', '<leader>dt', functions.diff_with_commit, { desc = 'Gitsings diff with 
 
 -- Telescope custom
 map('n', '<leader>/', functions.live_multigrep, { desc = 'Live Grep' })
+
+-- Align
+vim.keymap.set('x', '<Leader>a', ':EasyAlign<CR>', { desc = 'Align selection' })
