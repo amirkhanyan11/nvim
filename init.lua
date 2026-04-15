@@ -2,6 +2,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.clipboard = 'xclip'
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -330,25 +332,12 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       ---@type table<string, vim.lsp.Config>
       local servers = {
-        clangd = {},
-        -- gopls = {},
-        basedpyright = {
-          settings = {
-            basedpyright = {
-              analysis = {
-                -- Disable specific "noisy" hints
-                typeCheckingMode = "basic", -- Options: "off", "basic", "standard", "strict"
-                diagnosticSeverityOverrides = {
-                  reportUnusedImport = "none",
-                  reportUnusedVariable = "none",
-                  reportGeneralTypeIssues = "none",
-                  -- Disable the "hint" that a variable is unknown
-                  reportUnknownVariableType = "none",
-                  reportUnknownMemberType = "none",
-                  reportUnknownArgumentType = "none",
-                },
-              },
-            },        -- rust_analyzer = {},
+        clangd = {
+          cmd = {
+            "clangd",
+            "--query-driver=/home/artyom/ncs/toolchains/c5be9c56c7/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-g++",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
           },
         },
         --

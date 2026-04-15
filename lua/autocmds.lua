@@ -11,6 +11,11 @@ local projects = {
     remote_path = 'nvidia@thor77:projects/tts-0040',
     rsync_flags = '--exclude __pycache__ --exclude "*.pyc" --exclude "*.docx" --exclude docs',
   },
+  {
+    local_path = '/home/artyom/projects/LTENode/',
+    remote_path = 'artyom@10.1.0.184:/workspace/artyom/LTENode',
+    rsync_flags = '--exclude Docs --exclude Build',
+  },
 }
 
 local rsync_command = 'rsync -rtvzl --no-perms --no-owner --no-group %s %s %s'
